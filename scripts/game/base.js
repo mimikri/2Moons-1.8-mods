@@ -1,3 +1,136 @@
+//mobilmenu
+function requestFullScreen() {
+  if (((document.fullScreenElement && document.fullScreenElement !== null) ||
+   (!document.mozFullScreen && !document.webkitIsFullScreen)) && (window.self == window.top)) 
+   {
+	document.body.style ="overflow-y: hidden; width:100vw; height:100vh;";
+	document.head.innerHTML += '<meta name="viewport"  content="width=device-width ,   user-scalable = no">';
+	document.body.innerHTML = '<iframe width=582  id="fulls" frameborder="0"></iframe>';
+	var iframe = document.getElementById("fulls");
+	var sh = screen.availHeight;
+	var sw = screen.availWidth;
+	var fk = (sw / 582);
+		if((navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i) || sw < 583) && sw < sh)
+		{
+			iframe.style ="min-width:582px;" + 
+			" -webkit-transform: scale(" + fk + ");" +
+			" -moz-transform: scale(" + fk + ");" + 
+			" -ms-transform: scale(" + fk + ");" + 
+			" -o-transform: scale(" + fk + ");" + 
+			" transform: scale(" + fk + ");" + 
+			" left:" + ((582 * fk) - 582)/2 + "px;" + 
+			" top:" + (((sh / (sw / 582)) * fk) - (sh / (sw / 582)))/2 + "px;" + 
+			" position:absolute;" + 
+			" height:" + (sh / fk) + "px;";
+		}
+    var myVar = setInterval(function(){  }, 1000);
+	for (var i = 1; i <= myVar; i++){
+		clearInterval(i);
+	} 
+	iframe.contentDocument.location.href = "game.php"; 
+	 if (document.documentElement.requestFullScreen) {  
+      document.documentElement.requestFullScreen();  
+    } else if (document.documentElement.mozRequestFullScreen) {  
+      document.documentElement.mozRequestFullScreen();  
+    } else if (document.documentElement.webkitRequestFullScreen) {  
+      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+    }  
+  } else 
+  {  
+    if (window.top.cancelFullScreen) {  
+      window.top.cancelFullScreen();  
+    } else if (window.top.mozCancelFullScreen) {  
+      window.top.mozCancelFullScreen();  
+    } else if (window.top.webkitCancelFullScreen) {  
+      window.top.webkitCancelFullScreen();  
+    }  
+	window.parent.location.reload();
+  }  
+}
+	
+function dorpit(likeits){
+	if(likeits.style.height == "unset"){
+		likeits.style.height='78px';
+	}else{
+		likeits.style.height='unset';
+	}
+}
+
+function mmenu(das, hetal = 0){
+	if(hetal !== 0 ){
+		dacontent = document.getElementById('header');
+		dalmenu =document.getElementById('header');
+	}else{
+		dacontent = document.getElementById('content');
+		dalmenu =document.getElementById('leftmenu');
+	}
+	
+	if(das.getAttribute('press') !== 'p'){ 
+		menut1m.setAttribute('press', 'up'); 
+		menut2m.setAttribute('press', 'up'); 
+		menut3m.setAttribute('press', 'up'); 
+		das.setAttribute('press', 'p'); 
+		dalmenu.style = 'display:block;'; 
+		dacontent.style = 'display:none;';
+}else{ 
+		menut1p.setAttribute('press', 'up'); 
+		menut2p.setAttribute('press', 'up'); 
+		menut3p.setAttribute('press', 'up'); 
+		das.setAttribute('press', 'up'); 
+		dalmenu.style = 'display:none;'; 
+		dacontent.style = 'display:block;'}
+}
+
+//mobilmenu
+// tabs
+function tabse(geklickt,etab){
+	aclass.className ="inactive";
+	atab.className = "inactivetab";
+	aclass = geklickt;
+	atab = document.getElementById(etab);	
+	aclass.className = "active";
+	atab.className = 'activetab';	
+	}
+//tabs end
+// menu
+function menusel(butt,fild){
+	document.getElementById(menulast).style.display = "none";
+	document.getElementById(fild).style.display = "";
+	obutt.style = "filter:invert(50%); -webkit-filter:invert(50%);";
+	obutt = butt;
+	butt.style = "filter:invert(0%); -webkit-filter:invert(0%);";
+	menulast = fild;
+}
+
+
+function attacken(){
+	var alarmdiv = document.getElementById("alarm");
+	var xmlhttp = new XMLHttpRequest();
+	var url = "game.php?page=scan";
+	xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		if (isNaN(xmlhttp.responseText)){
+		alarmdiv.innerHTML = 'disconnected';
+		alarmdiv.style.background = 'red';
+		alarmdiv.setAttribute('class', 'atta');			
+		}else{
+        if(xmlhttp.responseText != '0'){
+		alarmdiv.innerHTML = xmlhttp.responseText;
+		alarmdiv.style.background = 'red';
+		alarmdiv.setAttribute('class', 'atta');
+		}else{
+		alarmdiv.innerHTML = xmlhttp.responseText;
+		alarmdiv.setAttribute('class', '');
+		alarmdiv.style.background = 'rgba(0,200,0,0.2)';
+		}
+		}
+	   }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+}	
+
+// menu
 function number_format (number, decimals) {
     number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
     var n = !isFinite(+number) ? 0 : +number,

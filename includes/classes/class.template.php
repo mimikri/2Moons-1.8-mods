@@ -132,8 +132,12 @@ class template extends Smarty
 	
 	public function display($file = NULL, $cache_id = NULL, $compile_id = NULL, $parent = NULL)
 	{
-		global $LNG;
-		$this->compile_id	= $LNG->getLanguage();
+		global $LNG, $THEME;
+		
+		$this->compile_id	= $LNG->getLanguage() . $THEME->skininfo["tag"];
+		if(in_array(substr (strrchr ($file, "|"), 1) , $THEME->customtpls) && MODE === 'INGAME'){
+		$this->setTemplateDir('styles/templates/' . $THEME->skininfo["tag"] . '/game/');
+		}
 		parent::display($file);
 	}
 	

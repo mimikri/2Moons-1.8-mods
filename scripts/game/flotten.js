@@ -150,9 +150,11 @@ function calculateTransportCapacity() {
 
 function maxShip(id) {
 	if (document.getElementsByName(id)[0]) {
-		var amount = document.getElementById(id + "_value").innerHTML;
-		document.getElementsByName(id)[0].value = amount.replace(/\./g, "");
-	}
+var amount = document.getElementById(id + "_value").getAttribute("data-real");
+var amount2 = document.getElementById(id + "_value").innerHTML +  '&nbsp;';
+document.getElementsByName(id + 'show')[0].value = amount2.replace(/\&nbsp;/g," ");
+document.getElementsByName(id)[0].value = amount.replace(/\./g, "");
+}
 }
 
 function maxShips() {

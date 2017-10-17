@@ -94,10 +94,10 @@
 	{foreach $FleetsOnPlanet as $FleetRow}
 	<tr style="height:20px;">
 		<td>{if $FleetRow.speed != 0} <a title="{$LNG.fl_speed_title} {$FleetRow.speed}">{$LNG.tech.{$FleetRow.id}}</a>{else}{$LNG.tech.{$FleetRow.id}}{/if}</td>
-		<td id="ship{$FleetRow.id}_value">{$FleetRow.count|number}</td>
+		<td id="ship{$FleetRow.id}_value" data-real="{$FleetRow.count}">{$FleetRow.count|number}</td>
 		{if $FleetRow.speed != 0}
 		<td><a href="javascript:maxShip('ship{$FleetRow.id}');">{$LNG.fl_max}</a></td>
-		<td><input name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0"></td>
+		<td><input type="hidden" name="ship{$FleetRow.id}" id="ship{$FleetRow.id}_input" size="10" value="0"><input name="ship{$FleetRow.id}show" id="ship{$FleetRow.id}_show" size="10" value="0" onchange="document.getElementById('ship{$FleetRow.id}_input').value = this.value;"></td>
 		{else}
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
