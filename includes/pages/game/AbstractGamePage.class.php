@@ -104,11 +104,15 @@ abstract class AbstractGamePage
 
 		foreach($USER['PLANETS'] as $PlanetQuery)
 		{
+			if($THEME->skininfo['name'] !== 'nui'){
+			$PlanetSelect[$PlanetQuery['id']]	= $PlanetQuery['name'].(($PlanetQuery['planet_type'] == 3) ? " (" . $LNG['fcm_moon'] . ")":"")." [".$PlanetQuery['galaxy'].":".$PlanetQuery['system'].":".$PlanetQuery['planet']."]";
+			}else{
 			$PlanetSelect[$PlanetQuery['id']] = array();
 			$PlanetSelect[$PlanetQuery['id']]['name']	= $PlanetQuery['name'].(($PlanetQuery['planet_type'] == 3) ? " (" . $LNG['fcm_moon'] . ")":"")."<br> [".$PlanetQuery['galaxy'].":".$PlanetQuery['system'].":".$PlanetQuery['planet']."]";
 			$PlanetSelect[$PlanetQuery['id']]['pic'] = $PlanetQuery['image'];
 			$PlanetSelect[$PlanetQuery['id']]['build'] = $PlanetQuery['b_building'];
 			$PlanetSelect[$PlanetQuery['id']]['buildi'] = unserialize($PlanetQuery['b_building_id']);
+			}
 		}
 
 		$resourceTable	= array();
